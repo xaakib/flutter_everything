@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'Api/screens/main_screen.dart';
+import 'Api/screens/photo_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainScreen(),
+      home: PhotoScreen(),
     );
   }
 }

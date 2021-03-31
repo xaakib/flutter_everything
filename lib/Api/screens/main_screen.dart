@@ -34,9 +34,7 @@ class _MainScreenState extends State<MainScreen> {
             future: futureAlbum,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return snapshot.data.username == null
-                    ? Text(snapshot.data.username)
-                    : CircularNotchedRectangle();
+                return Text(snapshot.data.name);
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
