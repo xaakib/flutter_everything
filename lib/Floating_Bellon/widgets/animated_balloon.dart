@@ -61,32 +61,40 @@ class _AnimatedBalloonState extends State<AnimatedBalloon>
     super.dispose();
   }
 
+  bool _visible = true;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AnimatedBuilder(
-            animation: _animationFloatUp,
-            builder: (context, child) {
-              return Container(
-                child: child,
-                margin: EdgeInsets.only(
-                  top: _animationFloatUp.value,
-                  left: _animationGrowSize.value * 0.25,
-                ),
-                width: _animationGrowSize.value,
-              );
-            },
-            child: Image.asset(
-              'assets/images/BeginningGoogleFlutter-Balloon.png',
-              height: _balloonHeight,
-              width: _balloonWidth,
+          Visibility(
+            visible: _visible,
+            child: AnimatedBuilder(
+              animation: _animationFloatUp,
+              builder: (context, child) {
+                return Container(
+                  child: child,
+                  margin: EdgeInsets.only(
+                    top: _animationFloatUp.value,
+                    left: _animationGrowSize.value * 0.25,
+                  ),
+                  width: _animationGrowSize.value,
+                );
+              },
+              child: Image.asset(
+                'assets/images/BeginningGoogleFlutter-Balloon.png',
+                height: _balloonHeight,
+                width: _balloonWidth,
+              ),
             ),
           ),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
+              setState(() {
+                _visible = !_visible;
+              });
               if (_controller.isCompleted) {
                 _controller.reverse();
               } else {
