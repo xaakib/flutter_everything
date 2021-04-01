@@ -10,18 +10,14 @@ class ApiServices {
         await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
 
     if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
       return Model.fromJson(jsonDecode(response.body));
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
       throw Exception('Failed to load album');
     }
   }
 
   Future<List<Photo>> fetchPhotos(http.Client client) async {
-    final response = await client
+    var response = await client
         .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
 
     return compute(parsePhotos, response.body);
