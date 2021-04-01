@@ -18,9 +18,14 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: AnimatedBalloon(),
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AnimatedBalloon(),
+            ),
+            
+          ],
         ),
       ),
     );

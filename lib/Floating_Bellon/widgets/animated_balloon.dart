@@ -7,7 +7,8 @@ class AnimatedBalloon extends StatefulWidget {
   _AnimatedBalloonState createState() => _AnimatedBalloonState();
 }
 
-class _AnimatedBalloonState extends State<AnimatedBalloon> with SingleTickerProviderStateMixin {
+class _AnimatedBalloonState extends State<AnimatedBalloon>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animationFloatUp;
   Animation<double> _animationGrowSize;
@@ -20,7 +21,8 @@ class _AnimatedBalloonState extends State<AnimatedBalloon> with SingleTickerProv
   void initState() {
     super.initState();
 
-    _controller = AnimationController(duration: Duration(seconds: 4), vsync: this);
+    _controller =
+        AnimationController(duration: Duration(seconds: 4), vsync: this);
   }
 
   @override
@@ -29,7 +31,8 @@ class _AnimatedBalloonState extends State<AnimatedBalloon> with SingleTickerProv
 
     _balloonHeight = MediaQuery.of(context).size.height / 2;
     _balloonWidth = MediaQuery.of(context).size.height / 3;
-    _balloonBottomLocation = MediaQuery.of(context).size.height - _balloonHeight;
+    _balloonBottomLocation =
+        MediaQuery.of(context).size.height - _balloonHeight;
 
     _animationFloatUp = Tween(begin: _balloonBottomLocation, end: 0.0).animate(
       CurvedAnimation(
@@ -60,32 +63,39 @@ class _AnimatedBalloonState extends State<AnimatedBalloon> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _animationFloatUp,
-      builder: (context, child) {
-        return Container(
-          child: child,
-          margin: EdgeInsets.only(
-            top: _animationFloatUp.value,
-            left: _animationGrowSize.value * 0.25,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          AnimatedBuilder(
+            animation: _animationFloatUp,
+            builder: (context, child) {
+              return Container(
+                child: child,
+                margin: EdgeInsets.only(
+                  top: _animationFloatUp.value,
+                  left: _animationGrowSize.value * 0.25,
+                ),
+                width: _animationGrowSize.value,
+              );
+            },
+            child: Image.asset(
+              'assets/images/BeginningGoogleFlutter-Balloon.png',
+              height: _balloonHeight,
+              width: _balloonWidth,
+            ),
           ),
-          width: _animationGrowSize.value,
-        );
-      },
-      child: GestureDetector(
-        child: Image.asset('assets/images/BeginningGoogleFlutter-Balloon.png',
-          height: _balloonHeight,
-          width: _balloonWidth,
-        ),
-        onTap: () {
-          if (_controller.isCompleted) {
-            _controller.reverse();
-          } else {
-            _controller.forward();
-          }
-        },
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              if (_controller.isCompleted) {
+                _controller.reverse();
+              } else {
+                _controller.forward();
+              }
+            },
+          )
+        ],
       ),
     );
   }
 }
-
