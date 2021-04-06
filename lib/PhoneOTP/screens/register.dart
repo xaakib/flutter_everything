@@ -1,6 +1,7 @@
 import 'package:email_auth/email_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_everything/PhoneOTP/screens/home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -27,6 +28,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         receiverMail: _emailController.text, userOTP: _otpController.text);
 
     if (res) {
+      res == null
+          ? print("No Data")
+          : Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => HomeScreen()));
       print("OTP Verifyed");
     } else {
       print("invalid OTP");
