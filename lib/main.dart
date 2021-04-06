@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Floating_Bellon/pages/home.dart';
+import 'PhoneOTP/screens/register.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: RegisterScreen(),
     );
   }
 }
