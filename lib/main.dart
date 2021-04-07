@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'PhoneOTP/screens/register.dart';
+import 'famous_live_auth/screens/login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RegisterScreen(),
+      home: LoginScreen(),
     );
   }
 }
