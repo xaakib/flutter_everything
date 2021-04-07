@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FmREgisterScreen extends StatelessWidget {
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +30,27 @@ class FmREgisterScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextFormField(
+                    decoration: InputDecoration(hintText: "Name"),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextFormField(
                     decoration: InputDecoration(hintText: "Email"),
                   ),
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: 20,
               ),
               Container(
                 height: 50,
@@ -46,11 +65,28 @@ class FmREgisterScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextFormField(
+                    decoration: InputDecoration(hintText: "Confirm Password"),
+                  ),
+                ),
+              ),
+              SizedBox(
                 height: 50,
               ),
               // ignore: deprecated_member_use
               FlatButton(
-                  color: Colors.white, onPressed: () {}, child: Text("Login"))
+                  color: Colors.white,
+                  onPressed: () {},
+                  child: Text("Register"))
             ],
           ),
         ),
