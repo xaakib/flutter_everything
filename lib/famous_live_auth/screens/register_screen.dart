@@ -14,6 +14,14 @@ class FmRegisterScreen extends StatelessWidget {
     _formKey.currentState.save();
   }
 
+  final TextEditingController nameController = TextEditingController();
+
+  final TextEditingController phoneController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  final TextEditingController confirmPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +31,7 @@ class FmRegisterScreen extends StatelessWidget {
       ),
       //body
       body: SingleChildScrollView(
-              child: Container(
+        child: Container(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             //form
@@ -36,6 +44,7 @@ class FmRegisterScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.width * 0.1,
                   ),
                   TextFormField(
+                    controller: nameController,
                     decoration: InputDecoration(labelText: 'Name'),
                     keyboardType: TextInputType.text,
                     onFieldSubmitted: (value) {
@@ -48,6 +57,7 @@ class FmRegisterScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.width * 0.1,
                   ),
                   TextFormField(
+                    controller: phoneController,
                     decoration: InputDecoration(labelText: 'Phone'),
                     keyboardType: TextInputType.number,
                     onFieldSubmitted: (value) {
@@ -60,6 +70,7 @@ class FmRegisterScreen extends StatelessWidget {
                   ),
                   //text input
                   TextFormField(
+                    controller: passwordController,
                     decoration: InputDecoration(labelText: 'Password'),
                     keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (value) {},
@@ -76,6 +87,7 @@ class FmRegisterScreen extends StatelessWidget {
                   ),
                   //text input
                   TextFormField(
+                    controller: confirmPassword,
                     decoration: InputDecoration(labelText: 'Confirm Password'),
                     keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (value) {},
@@ -102,7 +114,10 @@ class FmRegisterScreen extends StatelessWidget {
                         fontSize: 24.0,
                       ),
                     ),
-                    onPressed: () => _submit(),
+                    onPressed: () {
+                      print(phoneController.text);
+                      _submit();
+                    }
                   ),
                   SizedBox(
                     height: 20,
@@ -123,7 +138,8 @@ class FmRegisterScreen extends StatelessWidget {
                     onPressed: () => Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => FmLoginScreen())),
+                            builder: (BuildContext context) =>
+                                FmLoginScreen())),
                   ),
                 ],
               ),
