@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_everything/PhoneOTP/screens/register.dart';
 
-import 'famous_live_auth/screens/login_screen.dart';
 import 'famous_live_auth/screens/register_screen.dart';
 
 void main() {
