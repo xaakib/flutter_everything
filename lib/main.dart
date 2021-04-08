@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'famous_live_auth/screens/login_screen.dart';
 import 'famous_live_auth/screens/register_screen.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RegisterScreen(),
+      home: FmLoginScreen(),
     );
   }
 }

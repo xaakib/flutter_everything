@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+import 'register_screen.dart';
+
+class FmLoginScreen extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
-  
+
   void _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -11,7 +13,7 @@ class LoginScreen extends StatelessWidget {
     }
     _formKey.currentState.save();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +56,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.width * 0.1,
               ),
-              //text input 
+              //text input
               TextFormField(
                 decoration: InputDecoration(labelText: 'Password'),
                 keyboardType: TextInputType.emailAddress,
@@ -83,7 +85,12 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () => _submit(),
-              )
+              ),
+              SizedBox(height: 10),
+              // ignore: deprecated_member_use
+             RaisedButton(
+               child: Text("Data PAss"),
+               onPressed: (){})
             ],
           ),
         ),
