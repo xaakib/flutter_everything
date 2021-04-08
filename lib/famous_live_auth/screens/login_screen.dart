@@ -6,6 +6,8 @@ class FmLoginScreen extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
 
+
+
   void _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -13,6 +15,10 @@ class FmLoginScreen extends StatelessWidget {
     }
     _formKey.currentState.save();
   }
+
+  final TextEditingController phonController = TextEditingController();
+   final TextEditingController passwordController = TextEditingController();
+   
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +43,7 @@ class FmLoginScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.width * 0.1,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Phone'),
+                  controller: phonController,
                     keyboardType: TextInputType.number,
                     onFieldSubmitted: (value) {
                       //Validator
@@ -50,6 +56,7 @@ class FmLoginScreen extends StatelessWidget {
                   ),
                   //text input
                   TextFormField(
+                    controller: passwordController,
                     decoration: InputDecoration(labelText: 'Password'),
                     keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (value) {},
@@ -76,8 +83,12 @@ class FmLoginScreen extends StatelessWidget {
                         fontSize: 24.0,
                       ),
                     ),
-                    onPressed: () => _submit(),
-                  ),
+                    onPressed: (){
+                      print(phonController.text);
+                      print(passwordController.text);
+                      _submit();
+                    }),
+                  
                   SizedBox(height: 10),
                   // ignore: deprecated_member_use
                  RaisedButton(
