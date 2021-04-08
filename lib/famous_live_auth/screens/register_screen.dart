@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:http/http.dart' as http;
 
 class FmRegisterScreen extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
@@ -15,12 +20,29 @@ class FmRegisterScreen extends StatelessWidget {
   }
 
   final TextEditingController nameController = TextEditingController();
-
   final TextEditingController phoneController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
-
   final TextEditingController confirmPassword = TextEditingController();
+
+  // Future<http.Response> registerAuth() {
+  //   String url = "https://test.iqbal.live/api/auth/register ";
+
+  //   return http.post(
+  //     Uri.parse(url),
+  //     headers: {
+  //       "Accept": "application/json",
+  //       "Content-Type": "application/x-www-form-urlencoded"
+  //     },
+
+
+  //   );
+  // }
+
+  singIn(String phone , String pass)async{
+    String url = "https://test.iqbal.live/api/auth/register ";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,21 +126,20 @@ class FmRegisterScreen extends StatelessWidget {
                   ),
                   // ignore: deprecated_member_use
                   RaisedButton(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 15.0,
-                    ),
-                    child: Text(
-                      "Submit",
-                      style: TextStyle(
-                        fontSize: 24.0,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 15.0,
                       ),
-                    ),
-                    onPressed: () {
-                      print(phoneController.text);
-                      _submit();
-                    }
-                  ),
+                      child: Text(
+                        "Submit",
+                        style: TextStyle(
+                          fontSize: 24.0,
+                        ),
+                      ),
+                      onPressed: () {
+                        print(phoneController.text);
+                        _submit();
+                      }),
                   SizedBox(
                     height: 20,
                   ),
