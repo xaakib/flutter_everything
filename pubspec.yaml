@@ -27,6 +27,7 @@ dependencies:
   http:
   shared_preferences: 2.0.5
   fluttertoast: ^7.1.6
+  get:
 
 dev_dependencies:
   flutter_test:

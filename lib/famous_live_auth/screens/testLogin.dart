@@ -150,10 +150,12 @@
 
 
 import 'dart:convert';
+import 'package:flutter_everything/PhoneOTP/screens/home_screen.dart';
 import 'package:flutter_everything/famous_live_auth/screens/home_screen.dart';
 import 'package:flutter_everything/famous_live_auth/screens/models/login_model.dart';
 import 'package:flutter_everything/famous_live_auth/screens/testRegister.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -167,7 +169,7 @@ class LoginScreen extends StatefulWidget {
 
 }
 class LoginResData {
-  int type;
+  String type;
   LoginModel loginResponse;
 
   LoginResData(this.type, this.loginResponse);
@@ -221,15 +223,15 @@ class _LoginScreenState extends State<LoginScreen> {
       loginResponse = LoginModel.fromJson(json.decode(response.body));
       print('Login response ${loginResponse.status}');
       errorMessage = json.decode(response.body)['message'];
-      print('Status ${loginResponse.status}');
-      print('The error mesage  $errorMessage');
+      print('status ${loginResponse.status}');
 
-      if (loginResponse.status == 1) {
-        loginResData = LoginResData(1, loginResponse);
+      if (loginResponse.status == "Success") {
+        loginResData = LoginResData("Success", loginResponse);
+      
       } else {
         print("Error = $errorMessage");
 
-        loginResData = LoginResData(0, loginResponse);
+        loginResData = LoginResData("500", loginResponse);
       }
 
 
@@ -388,6 +390,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: double.infinity,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
+                        // ignore: deprecated_member_use
                         child: RaisedButton(
                           color: Colors.lightBlue,
                           onPressed: () {
@@ -426,9 +429,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           Colors.red,
                                           fontSize: 16.0);
 
-                                //  Get.to(PropertyPage(),transition: Transition.zoom);
-                                //         Navigator.of(context).pop();
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                                 Get.to(HomePage(),transition: Transition.zoom);
+                                      //  Navigator.of(context).pop();
+                              //  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
 
 
                                     } else {
