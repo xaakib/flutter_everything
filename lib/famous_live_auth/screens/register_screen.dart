@@ -2,45 +2,47 @@
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class FmRegisterScreen extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
-
-  void _submit() {
-    final isValid = _formKey.currentState.validate();
-    if (!isValid) { 
-      return;
-    }
-    _formKey.currentState.save();
-  }
-
+  
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
 
-  // Future<http.Response> registerAuth() {
-  //   String url = "https://test.iqbal.live/api/auth/register ";
-
-  //   return http.post(
-  //     Uri.parse(url),
-  //     headers: {
-  //       "Accept": "application/json",
-  //       "Content-Type": "application/x-www-form-urlencoded"
-  //     },
-
-
-  //   );
-  // }
-
-  singIn(String phone , String pass)async{
-    String url = "https://test.iqbal.live/api/auth/register ";
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
+ _submit() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      return registerUser();
+    }
+    return false;
   }
+
+
+ 
+  
+  registerUser() async {
+    var loginData = jsonEncode(<String, String>{
+      'name': nameController.text,
+      'mobile': phoneController.text,
+        'password': passwordController.text,
+      'password_confirmation': confirmPassword.text,
+
+    });
+    var res =
+        await http.post(Uri.parse("https://test.iqbal.live/api/auth/register"),
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: loginData);
+    print(res.body);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +137,6 @@ class FmRegisterScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        print(phoneController.text);
                         _submit();
                       }),
                   SizedBox(
