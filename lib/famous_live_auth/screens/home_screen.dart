@@ -37,7 +37,8 @@ class _HomePageState extends State<HomePage> {
       var jsonString = json.decode(response.body);
 
       UserModel userData = UserModel.fromJson(jsonString);
-      print(userData);
+      print("this the user name ${userData.data.name}");
+      print("this the user name ${userData.data.id}");
       return userData;
     } else {}
   }
@@ -49,6 +50,8 @@ class _HomePageState extends State<HomePage> {
     loadToken();
   }
 
+  UserModel usermode;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +60,20 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-         
+          Container(
+            height: 500,
+            child: FutureBuilder<UserModel>(
+                future: getProfile(),
+                builder: (context, AsyncSnapshot<UserModel> snapshot) {
+                  if (snapshot.hasData) {
+                    return ListTile(
+                      title: Text(snapshot.data.data.name),
+                      subtitle: Text(snapshot.data.data.mobile),
+                    );
+                  }
+                  return Text("No Data");
+                }),
+          ),
         ],
       ),
     );

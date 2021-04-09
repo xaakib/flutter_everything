@@ -227,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (loginResponse.status == "Success") {
         loginResData = LoginResData("Success", loginResponse);
-      
+        Get.to(HomeScreen());
       } else {
         print("Error = $errorMessage");
 
