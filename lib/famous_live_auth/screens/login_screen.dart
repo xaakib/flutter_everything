@@ -22,6 +22,7 @@ class FmLoginScreen extends StatelessWidget {
       'username': userNameController.text,
       'password': passwordController.text
     });
+    print(loginData);
     var res =
         await http.post(Uri.parse("https://test.iqbal.live/api/auth/login"),
             headers: {
@@ -55,7 +56,7 @@ class FmLoginScreen extends StatelessWidget {
                   ),
                   TextFormField(
                     controller: userNameController,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (value) {
                       //Validator
                     },
