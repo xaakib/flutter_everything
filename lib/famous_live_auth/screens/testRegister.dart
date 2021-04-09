@@ -2,15 +2,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class TestLogin extends StatefulWidget {
+class TestRegister extends StatefulWidget {
   @override
-  _TestLoginState createState() => _TestLoginState();
+  _TestRegisterState createState() => _TestRegisterState();
 }
 
-class _TestLoginState extends State<TestLogin> {
+class _TestRegisterState extends State<TestRegister> {
 
   TextEditingController name = TextEditingController();
+  TextEditingController mobile = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController password_confirmation = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,21 @@ class _TestLoginState extends State<TestLogin> {
                     },
                   ),
                 ),
-               
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+                  child: TextFormField(
+                    controller: mobile,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: buildInputDecoration(Icons.phone, "Phone No"),
+                    validator: (String value) {
+                      if (value.isEmpty) {
+                        return 'Please enter phone no ';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.only(bottom: 15, left: 10, right: 10),
@@ -61,7 +77,28 @@ class _TestLoginState extends State<TestLogin> {
                     },
                   ),
                 ),
-               
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+                  child: TextFormField(
+                    controller: password_confirmation,
+                    obscureText: true,
+                    keyboardType: TextInputType.text,
+                    decoration:
+                        buildInputDecoration(Icons.lock, "Confirm Password"),
+                    validator: (String value) {
+                      if (value.isEmpty) {
+                        return 'Please re-enter password';
+                      }
+                      print(password.text);
+                      print(password_confirmation.text);
+                      if (password.text != password_confirmation.text) {
+                        return "Password does not match";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
                 SizedBox(
                   width: 200,
                   height: 50,
@@ -70,7 +107,7 @@ class _TestLoginState extends State<TestLogin> {
                     color: Colors.redAccent,
                     onPressed: () {
                       if (_formkey.currentState.validate()) {
-                        loginApi();
+                        registerApi();
                         return;
                       } else {
                         print("UnSuccessfull");
@@ -91,17 +128,19 @@ class _TestLoginState extends State<TestLogin> {
     );
   }
 
-  Future loginApi() async {
+  Future registerApi() async {
 
     Map mapData = {
-      'username': name.text,
+      'name': name.text,
+      'mobile': mobile.text,
       'password': password.text,
+      'password_confirmation': password_confirmation.text,
     };
 
     print("JsonData ${mapData}");
 
    var res =
-        await http.post(Uri.parse("https://test.iqbal.live/api/auth/login/"),
+        await http.post(Uri.parse("https://test.iqbal.live/api/auth/register"),
             headers: {
               "Accept": "application/json",
               "Content-Type": "application/x-www-form-urlencoded"

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'famous_live_auth/screens/login_screen.dart';
 import 'famous_live_auth/screens/register_screen.dart';
 import 'famous_live_auth/screens/testLogin.dart';
+import 'famous_live_auth/screens/testRegister.dart';
 
 void main() {
   runApp(MyApp());
