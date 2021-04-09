@@ -7,22 +7,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-String token;
-
-
-  Future getToken() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    token = sharedPreferences.getString("token");
-    setState(() {
-      
-    });
-  }
-  @override
-  void initState() {
-    getToken();
-    super.initState();
-  }
+  String token;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +15,23 @@ String token;
       appBar: AppBar(
         title: Text("HomePage"),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-          child: Text(token),
-        ),
+      body: Center(
+        child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Text(
+                  "Profile",
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
+                ),
+              ],
+            )),
       ),
     );
   }

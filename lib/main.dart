@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'famous_live_auth/screens/home_screen.dart';
 import 'famous_live_auth/screens/login_screen.dart';
 import 'famous_live_auth/screens/register_screen.dart';
 import 'famous_live_auth/screens/testLogin.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: HomePage(),
     );
   }
 }

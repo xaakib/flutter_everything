@@ -197,6 +197,8 @@ class _LoginScreenState extends State<LoginScreen> {
     // Async func to handle Futures easier; or use Future.then
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('token', value);
+    print("this is the tokem$prefs");
+    
     return prefs.setString("token", value);
   }
 
@@ -211,15 +213,16 @@ class _LoginScreenState extends State<LoginScreen> {
         Uri.parse(url),
         body: requestModel.toJson(),
       );
+      
 
       print('API ${response.statusCode}\n API${json.decode(response.body)}');
 
       // return LoginResponseModel.fromJson();
       loginResponse = LoginModel.fromJson(json.decode(response.body));
-      print('bghbhdjsfbhsj ${loginResponse.status}');
-      errorMessage = json.decode(response.body)['msg'];
+      print('Login response ${loginResponse.status}');
+      errorMessage = json.decode(response.body)['message'];
       print('Status ${loginResponse.status}');
-      print('error mesage  $errorMessage');
+      print('The error mesage  $errorMessage');
 
       if (loginResponse.status == 1) {
         loginResData = LoginResData(1, loginResponse);
@@ -250,10 +253,12 @@ class _LoginScreenState extends State<LoginScreen> {
         },
       ),
     );
+    // ignore: deprecated_member_use
     _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 
 
+  // ignore: unused_field
   bool _autoValidate = false;
 
   @override
@@ -392,7 +397,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 login(loginRequestModel)
                                     .then((value) async {
                                   if (value != null) {
-                                    if (value.type == 1) {
+                                    if (value.type == 'Success') {
                                       saveToken(value
                                           .loginResponse.data.token);
                                       SharedPreferences
@@ -418,7 +423,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           backgroundColor:
                                           Colors.red,
                                           textColor:
-                                          Colors.white,
+                                          Colors.red,
                                           fontSize: 16.0);
 
                                 //  Get.to(PropertyPage(),transition: Transition.zoom);
@@ -435,9 +440,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                               .BOTTOM,
                                           timeInSecForIosWeb: 4,
                                           backgroundColor:
-                                      Colors.red,
+                                      Colors.black,
                                           textColor:
-                                          Colors.white,
+                                          Colors.red,
                                           fontSize: 20.0);
                                       setState(() {
                                         isLoading = false;
@@ -456,8 +461,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ToastGravity.BOTTOM,
                                         timeInSecForIosWeb: 4,
                                         backgroundColor:
-                                       Colors.red,
-                                        textColor: Colors.white,
+                                       Colors.black,
+                                        textColor: Colors.red,
                                         fontSize: 20.0);
                                   }
                                   Navigator.of(context);
