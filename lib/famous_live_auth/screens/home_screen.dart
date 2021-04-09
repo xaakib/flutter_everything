@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                       subtitle: Text(snapshot.data.data.mobile),
                     );
                   }
-                  return Text("No Data");
+                  return Center(child: CircularProgressIndicator());
                 }),
           ),
         ],

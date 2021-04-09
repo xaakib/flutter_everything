@@ -1,17 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'famous_live_auth/screens/home_screen.dart';
 import 'famous_live_auth/screens/login_screen.dart';
 import 'famous_live_auth/screens/register_screen.dart';
 import 'famous_live_auth/screens/testLogin.dart';
-import 'famous_live_auth/screens/testRegister.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+   var token;
+  void isLoogedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
+    setState(() {
+    
+    });
+    print(token);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    isLoogedIn();
+  }
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -20,7 +41,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: token==null ? LoginScreen() : HomePage()
     );
   }
 }
