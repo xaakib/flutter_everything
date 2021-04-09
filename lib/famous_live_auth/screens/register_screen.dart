@@ -1,10 +1,8 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:http/http.dart' as http;
 
 class FmRegisterScreen extends StatelessWidget {
@@ -13,7 +11,7 @@ class FmRegisterScreen extends StatelessWidget {
 
   void _submit() {
     final isValid = _formKey.currentState.validate();
-    if (!isValid) {
+    if (!isValid) { 
       return;
     }
     _formKey.currentState.save();

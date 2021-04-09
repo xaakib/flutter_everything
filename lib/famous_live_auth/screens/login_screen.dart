@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
-
+import 'dart:convert';
 import 'register_screen.dart';
+import 'package:http/http.dart' as http;
 
 class FmLoginScreen extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-
-
-  void _submit() {
-    final isValid = _formKey.currentState.validate();
-    if (!isValid) {
-      return;
+  _submit() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      return loginUser();
     }
-    _formKey.currentState.save();
+    return false;
   }
 
-  final TextEditingController phonController = TextEditingController();
-   final TextEditingController passwordController = TextEditingController();
-   
+  loginUser() async {
+    var loginData = jsonEncode(<String, String>{
+      'username': userNameController.text,
+      'password': passwordController.text
+    });
+    var res =
+        await http.post(Uri.parse("https://test.iqbal.live/api/auth/login"),
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: loginData);
+    print(res.body);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,7 @@ class FmLoginScreen extends StatelessWidget {
       ),
       //body
       body: SingleChildScrollView(
-              child: Container(
+        child: Container(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             //form
@@ -37,18 +49,16 @@ class FmLoginScreen extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: <Widget>[
-               
                   //styling
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.1,
                   ),
                   TextFormField(
-                  controller: phonController,
+                    controller: userNameController,
                     keyboardType: TextInputType.number,
                     onFieldSubmitted: (value) {
                       //Validator
                     },
-                    
                   ),
                   //box styling
                   SizedBox(
@@ -73,32 +83,33 @@ class FmLoginScreen extends StatelessWidget {
                   ),
                   // ignore: deprecated_member_use
                   RaisedButton(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 15.0,
-                    ),
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                        fontSize: 24.0,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 15.0,
                       ),
-                    ),
-                    onPressed: (){
-                      print(phonController.text);
-                      print(passwordController.text);
-                      _submit();
-                    }),
-                  
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 24.0,
+                        ),
+                      ),
+                      onPressed: () {
+                        // print(userNameController.text);
+                        // print(passwordController.text);
+                        _submit();
+                      }),
+
                   SizedBox(height: 10),
                   // ignore: deprecated_member_use
-                 RaisedButton(
-                   child: Text("Go TO Register"),
-                   onPressed: (){
-                     Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => FmRegisterScreen()));
-                   })
+                  RaisedButton(
+                      child: Text("Go TO Register"),
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    FmRegisterScreen()));
+                      })
                 ],
               ),
             ),
