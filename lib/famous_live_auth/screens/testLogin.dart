@@ -8,7 +8,6 @@ class TestLogin extends StatefulWidget {
 }
 
 class _TestLoginState extends State<TestLogin> {
-
   TextEditingController name = TextEditingController();
   TextEditingController password = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -45,7 +44,6 @@ class _TestLoginState extends State<TestLogin> {
                     },
                   ),
                 ),
-               
                 Padding(
                   padding:
                       const EdgeInsets.only(bottom: 15, left: 10, right: 10),
@@ -61,7 +59,6 @@ class _TestLoginState extends State<TestLogin> {
                     },
                   ),
                 ),
-               
                 SizedBox(
                   width: 200,
                   height: 50,
@@ -93,20 +90,15 @@ class _TestLoginState extends State<TestLogin> {
 
   Future loginApi() async {
 
-    Map mapData = {
-      'username': name.text,
-      'password': password.text,
-    };
-
-    print("JsonData ${mapData}");
-
-   var res =
-        await http.post(Uri.parse("https://test.iqbal.live/api/auth/login/"),
-            headers: {
-              "Accept": "application/json",
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: mapData);
+    var res = await http.post(
+        Uri.parse("https://test.iqbal.live/api/auth/login"),
+        headers: <String, String>{
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: <String, String>{
+          'username': name.text,
+          'password': password.text,
+        });
     print(res.body);
   }
 }
