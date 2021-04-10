@@ -415,9 +415,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     builder: (BuildContext
                                                             context) =>
                                                         HomePage()));
-                                            //  Navigator.of(context).pop();
-                                            //  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
-
                                           } else {
                                             Fluttertoast.showToast(
                                                 msg: errorMessage,
