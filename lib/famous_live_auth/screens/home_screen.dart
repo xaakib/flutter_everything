@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_everything/famous_live_auth/screens/models/usersModel.dart';
+import 'package:flutter_everything/famous_live_auth/screens/testLogin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -57,6 +58,16 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("HomePage"),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.login_outlined),
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginScreen()));
+              })
+        ],
       ),
       body: Column(
         children: [
@@ -69,6 +80,7 @@ class _HomePageState extends State<HomePage> {
                     return ListTile(
                       title: Text(snapshot.data.data.name),
                       subtitle: Text(snapshot.data.data.mobile),
+                      trailing: Text(snapshot.data.data.username),
                     );
                   }
                   return Center(child: CircularProgressIndicator());

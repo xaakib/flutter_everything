@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'famous_live_auth/screens/home_screen.dart';
-import 'famous_live_auth/screens/login_screen.dart';
-import 'famous_live_auth/screens/register_screen.dart';
 import 'famous_live_auth/screens/testLogin.dart';
 
 void main() {
