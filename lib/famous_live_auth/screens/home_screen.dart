@@ -11,13 +11,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  UserModel userModel = UserModel();
-
   Future loadToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.getString('token');
     return prefs.getString('token');
+  }
+  Future logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.remove('token');
+    return prefs.remove('token');
   }
 
   Future<UserModel> getProfile() async {
@@ -60,13 +64,15 @@ class _HomePageState extends State<HomePage> {
         title: Text("HomePage"),
         actions: [
           IconButton(
-              icon: Icon(Icons.login_outlined),
-              onPressed: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => LoginScreen()));
-              })
+            icon: Icon(Icons.login_outlined),
+            onPressed: () {
+             logout();
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => LoginScreen()),
+                  (Route<dynamic> route) => false);
+            },
+          )
         ],
       ),
       body: Column(

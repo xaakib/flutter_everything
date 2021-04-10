@@ -148,7 +148,6 @@
 //   );
 // }
 
-
 import 'dart:convert';
 import 'package:flutter_everything/PhoneOTP/screens/home_screen.dart';
 import 'package:flutter_everything/famous_live_auth/screens/home_screen.dart';
@@ -162,12 +161,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/login_request.dart';
 
-
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
-
 }
+
 class LoginResData {
   String type;
   LoginModel loginResponse;
@@ -176,8 +174,6 @@ class LoginResData {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
-
   LoginModel loginResponse;
 
   final emailController = TextEditingController();
@@ -190,7 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
   bool status;
   String errorMessage;
 
-
   //bool isLoading = false;
   bool isSuccess;
 
@@ -200,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('token', value);
     print("this is the tokem$prefs");
-    
+
     return prefs.setString("token", value);
   }
 
@@ -215,7 +210,6 @@ class _LoginScreenState extends State<LoginScreen> {
         Uri.parse(url),
         body: requestModel.toJson(),
       );
-      
 
       print('API ${response.statusCode}\n API${json.decode(response.body)}');
 
@@ -227,14 +221,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (loginResponse.status == "Success") {
         loginResData = LoginResData("Success", loginResponse);
-        Get.to(HomeScreen());
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => HomePage()));
       } else {
         print("Error = $errorMessage");
 
         loginResData = LoginResData("500", loginResponse);
       }
-
-
     } catch (e) {
       setState(() {
         isLoading = false;
@@ -259,7 +252,6 @@ class _LoginScreenState extends State<LoginScreen> {
     _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 
-
   // ignore: unused_field
   bool _autoValidate = false;
 
@@ -281,261 +273,243 @@ class _LoginScreenState extends State<LoginScreen> {
         centerTitle: true,
         title: Padding(
           padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-          
         ),
       ),
       body: isLoading
           ? Center(
-        child: Center(child: CircularProgressIndicator(),),
-      )
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
           : SingleChildScrollView(
-        child: Form(
-          key: _key,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 80,
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 28.0, top: 15),
-                    child: Text(
-                      "Sign In",
-                      style: TextStyle(fontSize: 25),
+              child: Form(
+                key: _key,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 80,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 28.0, right: 28, top: 15),
-                child: Container(
-                  child: TextFormField(
-                  //  autovalidate: true,
-                    controller: emailController,
-                    keyboardType:
-                    TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Enter your email';
-                      }
-
-                      return null;
-                    },
-                    onChanged: (numVal) {
-                      loginRequestModel.email =
-                          numVal;
-                      setState(() {
-                        email = numVal.trim();
-                      });
-                    },
-                    decoration: InputDecoration(
-                        hintText: "Email", border: OutlineInputBorder()),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 28.0, right: 28, top: 15),
-                child: Container(
-                  child: TextFormField(
-                    //   autovalidate: true,
-                    controller: passcontroller,
-                    onChanged: (numVal) {
-                      loginRequestModel.password =
-                          numVal;
-
-                      setState(() {
-                        password = numVal.trim();
-                      });
-                    },
-                    validator: (value) {
-                      if (value == null ||
-                          value.isEmpty) {
-                        return ('Enter your valid password');
-                      }
-                      return null;
-                    },
-                    obscureText: !_showPassword,
-                    decoration: InputDecoration(
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _showPassword = !_showPassword;
-                            });
-                          },
-                          child: Icon(_showPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                        ),
-                        hintText: "Password",
-                        border: OutlineInputBorder()),
-                  ),
-                ),
-              ),
-
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 28.0, right: 28, top: 25),
-                  child: Container(
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                      height: 50,
-                      width: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        // ignore: deprecated_member_use
-                        child: RaisedButton(
-                          color: Colors.lightBlue,
-                          onPressed: () {
-                            setState(() {
-                              if (_key.currentState
-                                  .validate()) {
-                                login(loginRequestModel)
-                                    .then((value) async {
-                                  if (value != null) {
-                                    if (value.type == 'Success') {
-                                      saveToken(value
-                                          .loginResponse.data.token);
-                                      SharedPreferences
-                                      sharedPref =
-                                      await SharedPreferences
-                                          .getInstance();
-                                     
-                                      sharedPref.setString(
-                                          'token',
-                                          value.loginResponse
-                                              .data.token);
-                                      setState(() {
-                                        isLoading = false;
-                                      });
-                                      Fluttertoast.showToast(
-                                          msg:
-                                          ('Login Successfully'),
-                                          toastLength: Toast
-                                              .LENGTH_SHORT,
-                                          gravity: ToastGravity
-                                              .BOTTOM,
-                                          timeInSecForIosWeb: 2,
-                                          backgroundColor:
-                                          Colors.red,
-                                          textColor:
-                                          Colors.red,
-                                          fontSize: 16.0);
-
-                                 Get.to(HomePage(),transition: Transition.zoom);
-                                      //  Navigator.of(context).pop();
-                              //  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
-
-
-                                    } else {
-                                      Fluttertoast.showToast(
-                                          msg: errorMessage,
-                                          toastLength: Toast
-                                              .LENGTH_SHORT,
-                                          gravity: ToastGravity
-                                              .BOTTOM,
-                                          timeInSecForIosWeb: 4,
-                                          backgroundColor:
-                                      Colors.black,
-                                          textColor:
-                                          Colors.red,
-                                          fontSize: 20.0);
-                                      setState(() {
-                                        isLoading = false;
-                                      });
-                                    }
-                                  } else {
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                                    Fluttertoast.showToast(
-                                        msg:
-                                        "Something went wrong!",
-                                        toastLength:
-                                        Toast.LENGTH_SHORT,
-                                        gravity:
-                                        ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 4,
-                                        backgroundColor:
-                                       Colors.black,
-                                        textColor: Colors.red,
-                                        fontSize: 20.0);
-                                  }
-                                  Navigator.of(context);
-
-                                  setState(() {});
-                                });
-                              } else {
-                                setState(() {
-                                  _autoValidate = true;
-                                });
-                              }
-                            });
-                          },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 28.0, top: 15),
                           child: Text(
                             "Sign In",
-                            style: TextStyle(fontSize: 17, color: Colors.white),
+                            style: TextStyle(fontSize: 25),
                           ),
                         ),
-                      )),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 28.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 6.0),
-                      child: InkWell(
-                          onTap: () {
-  
-                          },
-                          child: Container(
-                              child: Text(
-                            "Forgot password?",
-                            style: TextStyle(fontSize: 17),
-                          ))),
+                      ],
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 28.0, right: 28, top: 15),
+                      child: Container(
+                        child: TextFormField(
+                          //  autovalidate: true,
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Enter your email';
+                            }
+
+                            return null;
+                          },
+                          onChanged: (numVal) {
+                            loginRequestModel.email = numVal;
+                            setState(() {
+                              email = numVal.trim();
+                            });
+                          },
+                          decoration: InputDecoration(
+                              hintText: "Email", border: OutlineInputBorder()),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 28.0, right: 28, top: 15),
+                      child: Container(
+                        child: TextFormField(
+                          //   autovalidate: true,
+                          controller: passcontroller,
+                          onChanged: (numVal) {
+                            loginRequestModel.password = numVal;
+
+                            setState(() {
+                              password = numVal.trim();
+                            });
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return ('Enter your valid password');
+                            }
+                            return null;
+                          },
+                          obscureText: !_showPassword,
+                          decoration: InputDecoration(
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _showPassword = !_showPassword;
+                                  });
+                                },
+                                child: Icon(_showPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                              ),
+                              hintText: "Password",
+                              border: OutlineInputBorder()),
+                        ),
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 28.0, right: 28, top: 25),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8)),
+                            height: 50,
+                            width: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              // ignore: deprecated_member_use
+                              child: RaisedButton(
+                                color: Colors.lightBlue,
+                                onPressed: () {
+                                  setState(() {
+                                    if (_key.currentState.validate()) {
+                                      login(loginRequestModel)
+                                          .then((value) async {
+                                        if (value != null) {
+                                          if (value.type == 'Success') {
+                                            saveToken(
+                                                value.loginResponse.data.token);
+                                            SharedPreferences sharedPref =
+                                                await SharedPreferences
+                                                    .getInstance();
+
+                                            sharedPref.setString('token',
+                                                value.loginResponse.data.token);
+                                            setState(() {
+                                              isLoading = false;
+                                            });
+                                            Fluttertoast.showToast(
+                                                msg: ('Login Successfully'),
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                timeInSecForIosWeb: 2,
+                                                backgroundColor: Colors.red,
+                                                textColor: Colors.red,
+                                                fontSize: 16.0);
+
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        HomePage()));
+                                            //  Navigator.of(context).pop();
+                                            //  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+
+                                          } else {
+                                            Fluttertoast.showToast(
+                                                msg: errorMessage,
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                timeInSecForIosWeb: 4,
+                                                backgroundColor: Colors.black,
+                                                textColor: Colors.red,
+                                                fontSize: 20.0);
+                                            setState(() {
+                                              isLoading = false;
+                                            });
+                                          }
+                                        } else {
+                                          setState(() {
+                                            isLoading = false;
+                                          });
+                                          Fluttertoast.showToast(
+                                              msg: "Something went wrong!",
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                              timeInSecForIosWeb: 4,
+                                              backgroundColor: Colors.black,
+                                              textColor: Colors.red,
+                                              fontSize: 20.0);
+                                        }
+                                        Navigator.of(context);
+
+                                        setState(() {});
+                                      });
+                                    } else {
+                                      setState(() {
+                                        _autoValidate = true;
+                                      });
+                                    }
+                                  });
+                                },
+                                child: Text(
+                                  "Sign In",
+                                  style: TextStyle(
+                                      fontSize: 17, color: Colors.white),
+                                ),
+                              ),
+                            )),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 28.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6.0),
+                            child: InkWell(
+                                onTap: () {},
+                                child: Container(
+                                    child: Text(
+                                  "Forgot password?",
+                                  style: TextStyle(fontSize: 17),
+                                ))),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 28.0),
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Text(
+                              "Need an account?",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            InkWell(
+                                onTap: () {},
+                                child: Container(
+                                    child: Text(
+                                  " Register",
+                                  style: TextStyle(
+                                      fontSize: 17, color: Colors.blue),
+                                ))),
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
-              SizedBox(
-                height: 35,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 28.0),
-                child: Container(
-                  child: Row(
-                    children: [
-                      Text(
-                        "Need an account?",
-                        style: TextStyle(fontSize: 17),
-                      ),
-                      InkWell(
-                          onTap: () {
-                
-                          },
-                          child: Container(
-                              child: Text(
-                            " Register",
-                            style: TextStyle(fontSize: 17, color: Colors.blue),
-                          ))),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
