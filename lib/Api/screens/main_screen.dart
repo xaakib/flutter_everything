@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_everything/Api/models/models.dart';
+import 'package:flutter_everything/Api/models/testModeldata.dart';
 import 'package:flutter_everything/Api/service/api_service.dart';
 
 class MainScreen extends StatefulWidget {
@@ -9,13 +10,16 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   ApiServices apiServices = ApiServices();
-
+  TestData testData;
   Future<Model> futureAlbum;
+  initData() async {
+    testData = await apiServices.testDatas();
+  }
 
   @override
   void initState() {
     super.initState();
-    futureAlbum = apiServices.fetchAlbum();
+    initData();
   }
 
   @override
@@ -30,18 +34,37 @@ class _MainScreenState extends State<MainScreen> {
           title: Text('Fetch Data Example'),
         ),
         body: Center(
-          child: FutureBuilder<Model>(
-            future: futureAlbum,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data.name);
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
+          child: Container(
+            height: 500,
 
-              // By default, show a loading spinner.
-              return CircularProgressIndicator();
-            },
+            // child: FutureBuilder<TestData>(
+            //   future: apiServices.testDatas(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       return Text();
+            //     } else if (snapshot.hasError) {
+            //       return Text("${snapshot.error}");
+            //     }
+
+            // ),
+
+            child: testData.allLocation == null
+                ? Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: testData.allLocation.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                          title: Text(
+                              testData.allLocation[index].location.toString()),
+                          subtitle: Text(
+                            testData.allLocation[index].country.toString(),
+                          ));
+                    }),
+
+            //     // By default, show a loading spinner.
+            //     return CircularProgressIndicator();
+            //   },
+            // ),
           ),
         ),
       ),

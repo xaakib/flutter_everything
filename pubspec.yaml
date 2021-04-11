@@ -28,6 +28,7 @@ dependencies:
   shared_preferences: 2.0.5
   fluttertoast: ^7.1.6
   get:
+  agora_rtc_engine: ^3.3.2
 
 dev_dependencies:
   flutter_test:

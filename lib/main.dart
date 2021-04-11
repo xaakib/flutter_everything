@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Api/screens/main_screen.dart';
+import 'agora_project/screen.dart/agora_home.dart';
 import 'famous_live_auth/screens/home_screen.dart';
 import 'famous_live_auth/screens/testLogin.dart';
 
@@ -39,7 +41,9 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: token==null ? LoginScreen() : HomePage()
+      // home: token==null ? LoginScreen() : HomePage()
+      // 
+      home: MainScreen(),
     );
   }
 }
