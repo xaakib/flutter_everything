@@ -37,18 +37,6 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             Container(
               height: 500,
-
-              // child: FutureBuilder<TestData>(
-              //   future: apiServices.testDatas(),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.hasData) {
-              //       return Text();
-              //     } else if (snapshot.hasError) {
-              //       return Text("${snapshot.error}");
-              //     }
-
-              // ),
-
               child: testData.allLocation == null
                   ? Center(child: CircularProgressIndicator())
                   : ListView.builder(
@@ -61,37 +49,25 @@ class _MainScreenState extends State<MainScreen> {
                               testData.allLocation[index].country.toString(),
                             ));
                       }),
-
-              //     // By default, show a loading spinner.
-              //     return CircularProgressIndicator();
-              //   },
-              // ),
             ),
             SizedBox(
               height: 50,
             ),
             Container(
               height: 500,
-
-          
-
               child: testData.frontHotel == null
                   ? Center(child: CircularProgressIndicator())
                   : ListView.builder(
                       itemCount: testData.frontHotel.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                            title: Text(testData.frontHotel[index].location
-                                .toString()),
+                            title: Text(
+                                testData.frontHotel[index].location.toString()),
                             subtitle: Text(
-                              testData.frontHotel[index].amenities[index].name.toString(),
+                              testData.frontHotel[index].amenities[index].name
+                                  .toString(),
                             ));
                       }),
-
-              //     // By default, show a loading spinner.
-              //     return CircularProgressIndicator();
-              //   },
-              // ),
             ),
           ],
         ),
