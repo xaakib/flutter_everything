@@ -11,7 +11,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   ApiServices apiServices = ApiServices();
   TestData testData;
-  Future<Model> futureAlbum;
   initData() async {
     testData = await apiServices.testDatas();
   }
@@ -19,7 +18,9 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    initData();
+    setState(() {
+      initData();
+    });
   }
 
   @override
@@ -33,44 +34,52 @@ class _MainScreenState extends State<MainScreen> {
         appBar: AppBar(
           title: Text('Fetch Data Example'),
         ),
-        body: ListView(
-          children: [
-            Container(
-              height: 500,
-              child: testData.allLocation == null
-                  ? Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      itemCount: testData.allLocation.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                            title: Text(testData.allLocation[index].location
-                                .toString()),
-                            subtitle: Text(
-                              testData.allLocation[index].country.toString(),
-                            ));
-                      }),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              height: 500,
-              child: testData.frontHotel == null
-                  ? Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      itemCount: testData.frontHotel.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                            title: Text(
-                                testData.frontHotel[index].location.toString()),
-                            subtitle: Text(
-                              testData.frontHotel[index].amenities[index].name
-                                  .toString(),
-                            ));
-                      }),
-            ),
-          ],
-        ),
+        body: testData.allLocation != null
+            ? ListView(
+                children: [
+                  Container(
+                    height: 500,
+                    child: testData.frontHotel != null
+                        ? ListView.builder(
+                            itemCount: testData.frontHotel.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                  title: Text(testData
+                                      .frontHotel[index].location
+                                      .toString()),
+                                  subtitle: Text(
+                                    testData.frontHotel[index].basicprice
+                                        .toString(),
+                                  ));
+                            })
+                        : Center(child: CircularProgressIndicator()),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    height: 500,
+                    child: testData.allLocation != null
+                        ? ListView.builder(
+                            itemCount: testData.allLocation.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                  title: Text(testData
+                                      .allLocation[index].location
+                                      .toString()),
+                                  subtitle: Text(
+                                    testData.allLocation[index].country
+                                        .toString(),
+                                  ));
+                            })
+                        : Center(child: CircularProgressIndicator()),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              )
+            : Center(child: CircularProgressIndicator()),
       ),
     );
   }

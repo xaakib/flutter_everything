@@ -38,17 +38,12 @@ class ApiServices {
     return compute(parsePhotos, response.body);
   }
 
-  Future<TestData> testDatas() async {
+  Future testDatas() async {
     String url = "https://vromonbuzz.com/api/home/alldata?appKey=VromonBuzz";
-    http.Response response =
-        await http.get(Uri.parse(url));
+    http.Response response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
-      
-    //  var datas= 
-    //  print((response.body));
-    // 
-     return TestData.fromJson(jsonDecode(response.body)[0]);
+      return TestData.fromJson(jsonDecode(response.body)[0]);
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
