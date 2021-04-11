@@ -33,39 +33,67 @@ class _MainScreenState extends State<MainScreen> {
         appBar: AppBar(
           title: Text('Fetch Data Example'),
         ),
-        body: Center(
-          child: Container(
-            height: 500,
+        body: ListView(
+          children: [
+            Container(
+              height: 500,
 
-            // child: FutureBuilder<TestData>(
-            //   future: apiServices.testDatas(),
-            //   builder: (context, snapshot) {
-            //     if (snapshot.hasData) {
-            //       return Text();
-            //     } else if (snapshot.hasError) {
-            //       return Text("${snapshot.error}");
-            //     }
+              // child: FutureBuilder<TestData>(
+              //   future: apiServices.testDatas(),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.hasData) {
+              //       return Text();
+              //     } else if (snapshot.hasError) {
+              //       return Text("${snapshot.error}");
+              //     }
 
-            // ),
+              // ),
 
-            child: testData.allLocation == null
-                ? Center(child: CircularProgressIndicator())
-                : ListView.builder(
-                    itemCount: testData.allLocation.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                          title: Text(
-                              testData.allLocation[index].location.toString()),
-                          subtitle: Text(
-                            testData.allLocation[index].country.toString(),
-                          ));
-                    }),
+              child: testData.allLocation == null
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      itemCount: testData.allLocation.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                            title: Text(testData.allLocation[index].location
+                                .toString()),
+                            subtitle: Text(
+                              testData.allLocation[index].country.toString(),
+                            ));
+                      }),
 
-            //     // By default, show a loading spinner.
-            //     return CircularProgressIndicator();
-            //   },
-            // ),
-          ),
+              //     // By default, show a loading spinner.
+              //     return CircularProgressIndicator();
+              //   },
+              // ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Container(
+              height: 500,
+
+          
+
+              child: testData.frontHotel == null
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      itemCount: testData.frontHotel.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                            title: Text(testData.frontHotel[index].location
+                                .toString()),
+                            subtitle: Text(
+                              testData.frontHotel[index].amenities[index].name.toString(),
+                            ));
+                      }),
+
+              //     // By default, show a loading spinner.
+              //     return CircularProgressIndicator();
+              //   },
+              // ),
+            ),
+          ],
         ),
       ),
     );
