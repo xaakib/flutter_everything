@@ -8,7 +8,7 @@ class ErrHomeScreen extends StatefulWidget {
 }
 
 Future<UserModel> createUser(String name, String job) async {
-  final String apiUrl = "https://reqres.in//api/users";
+  final String apiUrl = "https://reqres.in/api/users";
 
   final response = await http.post(Uri.parse(apiUrl), body: {
     "name": name,
@@ -27,6 +27,14 @@ class _ErrHomeScreenState extends State<ErrHomeScreen> {
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController jobController = TextEditingController();
+
+  UserModel _userModel;
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    jobController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +83,23 @@ class _ErrHomeScreenState extends State<ErrHomeScreen> {
               ),
             ),
             SizedBox(height: 50),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                  "this is the user name ${_userModel.name}, and is was ${_userModel.id} , and the job title is ${_userModel.job} and create time date is ${_userModel.createdAt}"),
+            ),
+            // ignore: deprecated_member_use
             FlatButton(
-                color: Colors.red, onPressed: () {}, child: Text("Post")),
+                color: Colors.red,
+                onPressed: () async {
+                  final String name = nameController.text;
+                  final String job = jobController.text;
+                  final UserModel userMod = await createUser(name, job);
+                  setState(() {
+                    _userModel = userMod;
+                  });
+                },
+                child: Text("Post")),
           ],
         ),
       ),
