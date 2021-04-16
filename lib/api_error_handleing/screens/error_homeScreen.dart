@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_everything/api_error_handleing/models/user_model.dart';
+import 'package:http/http.dart' as http;
 
 class ErrHomeScreen extends StatefulWidget {
   @override
   _ErrHomeScreenState createState() => _ErrHomeScreenState();
 }
 
+Future<UserModel> createUser(String name, String job) async {
+  final String apiUrl = "https://reqres.in//api/users";
 
+  final response = await http.post(Uri.parse(apiUrl), body: {
+    "name": name,
+    "job": job,
+  });
+
+  if (response.statusCode == 201) {
+    final String responseString = response.body;
+    return userModelFromJson(responseString);
+  } else {
+    print("No database COnnected");
+  }
+}
 
 class _ErrHomeScreenState extends State<ErrHomeScreen> {
   final TextEditingController nameController = TextEditingController();
