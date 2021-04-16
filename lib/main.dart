@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Api/screens/main_screen.dart';
 import 'agora_project/screen.dart/agora_home.dart';
+import 'api_error_handleing/screens/error_homeScreen.dart';
 import 'famous_live_auth/screens/home_screen.dart';
 import 'famous_live_auth/screens/testLogin.dart';
 
@@ -18,13 +19,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-   var token;
+  var token;
   void isLoogedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
-    setState(() {
-    
-    });
+    setState(() {});
     print(token);
   }
 
@@ -33,6 +32,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     isLoogedIn();
   }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -42,8 +42,8 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       // home: token==null ? LoginScreen() : HomePage()
-      // 
-      home: MainScreen(),
+      //
+      home: ErrHomeScreen(),
     );
   }
 }
