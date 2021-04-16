@@ -340,7 +340,7 @@ class FrontLocation {
         thumbnail: json["thumbnail"],
         country: countryValues.map[json["country"]],
         property: json["property"],
-        avgPrice: json["avgPrice"],
+        // avgPrice: json["avgPrice"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -349,7 +349,7 @@ class FrontLocation {
         "thumbnail": thumbnail,
         "country": countryValues.reverse[country],
         "property": property,
-        "avgPrice": avgPrice,
+        // "avgPrice": avgPrice,
     };
 }
 
