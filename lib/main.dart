@@ -8,6 +8,7 @@ import 'agora_project/screen.dart/agora_home.dart';
 import 'api_error_handleing/screens/error_homeScreen.dart';
 import 'famous_live_auth/screens/home_screen.dart';
 import 'famous_live_auth/screens/testLogin.dart';
+import 'photo_filter/image_picker.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       ),
       // home: token==null ? LoginScreen() : HomePage()
       //
-      home: PhotoFilter(),
+      home: ImagePckerScreen(),
     );
   }
 }
