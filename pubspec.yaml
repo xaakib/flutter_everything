@@ -23,12 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  http:
-  shared_preferences: 2.0.5
-  fluttertoast: ^7.1.6
-  get:
   agora_rtc_engine: ^3.3.2
+  cupertino_icons: ^1.0.2
+  fluttertoast: ^7.1.6
+  get: null
+  http: null
+  image_picker: ^0.7.4
+  photofilters: ^2.0.2
+  shared_preferences: 2.0.5
 
 dev_dependencies:
   flutter_test:

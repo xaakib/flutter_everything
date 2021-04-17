@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_everything/photo_filter/photo_filter.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       ),
       // home: token==null ? LoginScreen() : HomePage()
       //
-      home: ErrHomeScreen(),
+      home: PhotoFilter(),
     );
   }
 }

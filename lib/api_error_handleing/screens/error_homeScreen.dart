@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_everything/api_error_handleing/models/user_model.dart';
+import 'package:flutter_everything/api_error_handleing/screens/secountCsreen.dart';
 import 'package:http/http.dart' as http;
 
 class ErrHomeScreen extends StatefulWidget {
@@ -29,12 +30,6 @@ class _ErrHomeScreenState extends State<ErrHomeScreen> {
   final TextEditingController jobController = TextEditingController();
 
   UserModel _userModel;
-  @override
-  void dispose() {
-    super.dispose();
-    nameController.dispose();
-    jobController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,12 +78,6 @@ class _ErrHomeScreenState extends State<ErrHomeScreen> {
               ),
             ),
             SizedBox(height: 50),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                  "this is the user name ${_userModel.name}, and is was ${_userModel.id} , and the job title is ${_userModel.job} and create time date is ${_userModel.createdAt}"),
-            ),
-            // ignore: deprecated_member_use
             FlatButton(
                 color: Colors.red,
                 onPressed: () async {
@@ -98,6 +87,13 @@ class _ErrHomeScreenState extends State<ErrHomeScreen> {
                   setState(() {
                     _userModel = userMod;
                   });
+                  print(_userModel.id.toString());
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Soucentscreen(
+                                userModel: _userModel,
+                              )));
                 },
                 child: Text("Post")),
           ],
