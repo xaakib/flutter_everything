@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'streambuilder/stream_homeScreen.dart';
-import 'textFiled_widget/texfield_focuse.dart';
+import 'googlemap/init_map.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,31 +14,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // var token;
-  // void isLoogedIn() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   token = prefs.getString('token');
-  //   setState(() {});
-  //   print(token);
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   isLoogedIn();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // home: token==null ? LoginScreen() : HomePage()
-      //
-      home: TexFieldFocus(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          primarySwatch: Colors.blue,
+        ),
+        // home: token==null ? LoginScreen() : HomePage()
+        //
+        home: HomeScreen());
   }
 }

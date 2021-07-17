@@ -27,6 +27,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   fluttertoast: ^7.1.6
   get: null
+  google_maps_controller: ^1.2.0
+  google_maps_flutter: ^2.0.6
   http: null
   image_picker: ^0.7.4
   photofilters: ^2.0.2
