@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'googlemap/init_map.dart';
+import 'multiple_index_select.dart/multiple_index_slection.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,6 +26,6 @@ class _MyAppState extends State<MyApp> {
         ),
         // home: token==null ? LoginScreen() : HomePage()
         //
-        home: HomeScreen());
+        home: MultipleIndexSelection());
   }
 }
