@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'googlemap/init_map.dart';
+import 'getx_add_to_cart/views/catalogueScreen.dart';
 import 'multiple_index_select.dart/multiple_index_slection.dart';
 
 void main() {
@@ -26,6 +25,6 @@ class _MyAppState extends State<MyApp> {
         ),
         // home: token==null ? LoginScreen() : HomePage()
         //
-        home: MultipleIndexSelection());
+        home: ProductScreen());
   }
 }
