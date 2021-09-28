@@ -12,6 +12,7 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+       print("object");
     return Container(
       margin: EdgeInsets.all(10),
       height: screenSize.height * 0.15,

@@ -4,6 +4,7 @@ import 'package:flutter_everything/getx_add_to_cart/viewmodel/addToCartVM.dart';
 import 'package:flutter_everything/getx_add_to_cart/views/cart.dart';
 import 'package:flutter_everything/getx_add_to_cart/views/widgets/cartCounter.dart';
 import 'package:flutter_everything/getx_add_to_cart/views/widgets/productItem.dart';
+import 'package:flutter_everything/login_auth_testing_api/login_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
@@ -115,6 +116,15 @@ class _ProductScreenState extends State<ProductScreen> {
               child: Container(
                 height: 40,
                 child: Text("Add"),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.to(LoginAuthApiScreen());
+              },
+              child: Container(
+                height: 40,
+                child: Text("Login Screen"),
               ),
             ),
           ],

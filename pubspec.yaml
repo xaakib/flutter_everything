@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_cart: ^0.0.6
   fluttertoast: ^7.1.6
   get: null
   google_maps_controller: ^1.2.0

@@ -11,6 +11,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+       print("object");
     var screenSize = MediaQuery.of(context).size;
     return GetBuilder<AddToCartVM>(
       // specify type as Controller

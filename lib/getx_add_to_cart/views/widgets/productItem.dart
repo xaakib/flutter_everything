@@ -2,8 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_everything/getx_add_to_cart/viewmodel/addToCartVM.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 
+import '../CartDetailsScreen.dart';
 class ProductItem extends StatelessWidget {
+  
   const ProductItem(
       {Key key, @required this.screenSize, this.image, this.itemName})
       : super(key: key);
@@ -13,6 +17,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+       print("object");
     return Container(
       margin: EdgeInsets.all(10),
       height: screenSize.height * 0.2,
@@ -29,15 +34,20 @@ class ProductItem extends StatelessWidget {
           ]),
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: CachedNetworkImage(
-              height: screenSize.height * 0.13,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              placeholder: (context, url) =>
-                  Center(child: CircularProgressIndicator()),
-              imageUrl: image ?? 'https://picsum.photos/250?image=9',
+          InkWell(
+            onTap: (){
+              Get.to(CartDetailsScreen());
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: CachedNetworkImage(
+                height: screenSize.height * 0.13,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    Center(child: CircularProgressIndicator()),
+                imageUrl: image ?? 'https://picsum.photos/250?image=9',
+              ),
             ),
           ),
           Padding(
