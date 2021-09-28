@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
     return prefs.remove('token');
   }
 
+  // ignore: missing_return
   Future<UserModel> getProfile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token');

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_everything/shearprefernce/shearPreferance_demo.dart';
 import 'package:get/get.dart';
 import 'getx_add_to_cart/views/catalogueScreen.dart';
 
@@ -24,6 +25,6 @@ class _MyAppState extends State<MyApp> {
         ),
         // home: token==null ? LoginScreen() : HomePage()
         //
-        home: ProductScreen());
+        home: SharedPreferencesDemo());
   }
 }

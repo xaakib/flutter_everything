@@ -5,6 +5,7 @@ import 'login_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+// ignore: must_be_immutable
 class FmRegisterScreen extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;

@@ -8,6 +8,7 @@ class ErrHomeScreen extends StatefulWidget {
   _ErrHomeScreenState createState() => _ErrHomeScreenState();
 }
 
+// ignore: missing_return
 Future<UserModel> createUser(String name, String job) async {
   final String apiUrl = "https://reqres.in/api/users";
 
@@ -78,6 +79,7 @@ class _ErrHomeScreenState extends State<ErrHomeScreen> {
               ),
             ),
             SizedBox(height: 50),
+            // ignore: deprecated_member_use
             FlatButton(
                 color: Colors.red,
                 onPressed: () async {
