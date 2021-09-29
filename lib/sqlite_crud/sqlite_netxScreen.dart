@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_everything/sqlite_crud/sql_helper.dart';
+import 'package:flutter_everything/sqlite_crud/sqlite_crud_screen.dart';
 
 class SqliteNextScreen extends StatefulWidget {
   const SqliteNextScreen({Key key}) : super(key: key);
@@ -9,7 +10,7 @@ class SqliteNextScreen extends StatefulWidget {
 }
 
 class _SqliteNextScreenState extends State<SqliteNextScreen> {
-   List<Map<String, dynamic>> _journals = [];
+  List<Map<String, dynamic>> _journals = [];
 
   bool _isLoading = true;
   void _refreshJournals() async {
@@ -33,32 +34,40 @@ class _SqliteNextScreenState extends State<SqliteNextScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("NextScreen"),
-        leading: IconButton(onPressed: (){
-          
-          Navigator.pop(context);
-        },icon: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.black,),),
-
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => SqliteCrudScreen()),
+                ModalRoute.withName("/Home"));
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Colors.black,
+          ),
+        ),
       ),
-
       body: Container(
         height: double.infinity,
         child: Column(
           children: [
             ElevatedButton(
               child: Text("Add Data"),
-              onPressed: () =>_showForm(null),
+              onPressed: () => _showForm(null),
             )
           ],
         ),
       ),
     );
   }
- Future<void> _addItem() async {
+
+  Future<void> _addItem() async {
     await SQLHelper.createItem(
         _titleController.text, _descriptionController.text);
     _refreshJournals();
   }
-   Future<void> _updateItem(int id) async {
+
+  Future<void> _updateItem(int id) async {
     await SQLHelper.updateItem(
         id, _titleController.text, _descriptionController.text);
     _refreshJournals();
