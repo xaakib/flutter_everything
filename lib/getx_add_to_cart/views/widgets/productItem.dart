@@ -36,7 +36,8 @@ class ProductItem extends StatelessWidget {
         children: [
           InkWell(
             onTap: (){
-              Get.to(CartDetailsScreen());
+             
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>CartDetailsScreen()));
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),

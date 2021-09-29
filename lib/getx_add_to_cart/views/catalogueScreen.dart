@@ -52,7 +52,7 @@ class _ProductScreenState extends State<ProductScreen> {
         actions: [
           InkWell(
             onTap: () {
-              Get.to(CartScreen());
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
             },
             child: Padding(
               padding:

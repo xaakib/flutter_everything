@@ -6,14 +6,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'model/user_model.dart';
 
 class ThirdScreen extends StatefulWidget {
-  const ThirdScreen({ Key  key }) : super(key: key);
+  const ThirdScreen({Key key}) : super(key: key);
 
   @override
   _ThirdScreenState createState() => _ThirdScreenState();
 }
 
 class _ThirdScreenState extends State<ThirdScreen> {
-    saveData({String name, String email, int age}) async {
+  saveData({String name, String email, int age}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     List<String> listData = [];
     final testUser = UserModels(
@@ -26,7 +26,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
     listData.add(jsonData);
     sharedPreferences.setStringList("list", listData);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,20 +37,20 @@ class _ThirdScreenState extends State<ThirdScreen> {
         height: double.infinity,
         child: Column(
           children: [
-             Center(
-                child: ElevatedButton(
-                  child: Text("Data2"),
-                  onPressed: () {
-                    
-                    saveData(
-                        name: "THired Screen", age: 21, email: "xaakibx@gmail.com");
-                  },
-                ),
+            Center(
+              child: ElevatedButton(
+                child: Text("Data2"),
+                onPressed: () {
+                  saveData(
+                      name: "THired Screen",
+                      age: 21,
+                      email: "xaakibx@gmail.com");
+                },
               ),
+            ),
           ],
         ),
       ),
-      
     );
   }
 }
