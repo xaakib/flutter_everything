@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_everything/shearprefernce/model/user_model.dart';
 import 'package:flutter_everything/shearprefernce/secoundScreen.dart';
+import 'package:flutter_everything/shearprefernce/thiredScreen.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,9 +49,10 @@ class SharedPreferencesDemoState extends State<SharedPreferencesDemo> {
             children: [
               Center(
                 child: ElevatedButton(
-                  child: Text("Data1"),
+                  child: Text("GoTO THirdscreen"),
                   onPressed: () {
-                    saveData(name: "test", age: 21, email: "xaakibx@gmail.com");
+                    Get.to(ThirdScreen());
+                   
                   },
                 ),
               ),
