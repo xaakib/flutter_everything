@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Soucentscreen extends StatelessWidget {
   final userModel;
 
-  const Soucentscreen({Key key, this.userModel}) : super(key: key);
+  const Soucentscreen({Key? key, this.userModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

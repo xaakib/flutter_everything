@@ -9,28 +9,13 @@ class ErrHomeScreen extends StatefulWidget {
 }
 
 // ignore: missing_return
-Future<UserModel> createUser(String name, String job) async {
-  final String apiUrl = "https://reqres.in/api/users";
-
-  final response = await http.post(Uri.parse(apiUrl), body: {
-    "name": name,
-    "job": job,
-  });
-
-  if (response.statusCode == 201) {
-    final String responseString = response.body;
-    return userModelFromJson(responseString);
-  } else {
-    print("No database COnnected");
-  }
-}
 
 class _ErrHomeScreenState extends State<ErrHomeScreen> {
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController jobController = TextEditingController();
 
-  UserModel _userModel;
+  late UserModel _userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +70,23 @@ class _ErrHomeScreenState extends State<ErrHomeScreen> {
                 onPressed: () async {
                   final String name = nameController.text;
                   final String job = jobController.text;
-                  final UserModel userMod = await createUser(name, job);
+                  final UserModel? userMod = await (String name, String job) async {
+                    final String apiUrl = "https://reqres.in/api/users";
+                  
+                    final response = await http.post(Uri.parse(apiUrl), body: {
+                      "name": name,
+                      "job": job,
+                    });
+                  
+                    if (response.statusCode == 201) {
+                      final String responseString = response.body;
+                      return userModelFromJson(responseString);
+                    } else {
+                      print("No database COnnected");
+                    }
+                  }(name, job);
                   setState(() {
-                    _userModel = userMod;
+                    _userModel = userMod!;
                   });
                   print(_userModel.id.toString());
                   Navigator.push(

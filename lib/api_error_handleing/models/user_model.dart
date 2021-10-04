@@ -10,10 +10,10 @@ String userModelToJson(UserModel data) => json.encode(data.toJson());
 
 class UserModel {
   UserModel({
-    this.name,
-    this.job,
-    this.id,
-    this.createdAt,
+    required this.name,
+    required this.job,
+    required this.id,
+    required this.createdAt,
   });
 
   String name;
