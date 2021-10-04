@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_everything/sqlite_crud/sql_helper.dart';
 import 'package:flutter_everything/sqlite_crud/sqlite_netxScreen.dart';
@@ -119,14 +117,20 @@ class _SqliteCrudScreenState extends State<SqliteCrudScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("FirstScreen");
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kindacode.com'),
+        title: Text('SQL Crud'),
         actions: [
           Text(_journals.length.toString()),
-          IconButton(onPressed: (){}, icon: IconButton(onPressed: (){
-           Get.to(SqliteShoppingScreen()); 
-          },icon: Icon(Icons.shopping_bag_outlined),))
+          IconButton(
+              onPressed: () {},
+              icon: IconButton(
+                onPressed: () {
+                  Get.to(SqliteShoppingScreen());
+                },
+                icon: Icon(Icons.shopping_bag_outlined),
+              ))
         ],
       ),
       body: _isLoading
@@ -149,7 +153,6 @@ class _SqliteCrudScreenState extends State<SqliteCrudScreen> {
                             width: 100,
                             child: Row(
                               children: [
-                                
                                 IconButton(
                                   icon: Icon(Icons.edit),
                                   onPressed: () =>
@@ -168,7 +171,10 @@ class _SqliteCrudScreenState extends State<SqliteCrudScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SqliteNextScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SqliteNextScreen()));
                   },
                   child: Text("Next Screen"),
                 )
