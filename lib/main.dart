@@ -4,6 +4,7 @@ import 'package:flutter_everything/videoPlayerScreen/firstVideoPlayer.dart';
 import 'package:flutter_everything/youtube_video_player/firstYoutubeScreen.dart';
 import 'package:get/get.dart';
 import 'getx_add_to_cart/views/catalogueScreen.dart';
+import 'navigator_pop_reload_screen/navigator_firscreen.dart';
 import 'sqlite_crud/sqlite_crud_screen.dart';
 import 'youtube_video_player/youtube_video_player.dart';
 
@@ -29,6 +30,6 @@ class _MyAppState extends State<MyApp> {
         ),
         // home: token==null ? LoginScreen() : HomePage()
         //
-        home: GOToVideoScreen());
+        home: NavigatorFirstScreen());
   }
 }
