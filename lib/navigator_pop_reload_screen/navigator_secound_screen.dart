@@ -18,12 +18,12 @@ class _NavigatorSecoundScreenState extends State<NavigatorSecoundScreen> {
         title: Text("Secound Screen"),
       ),
       body: Container(
-        color: Colors.red,
+        color: Colors.blue,
         child: Center(
           child: ElevatedButton(
             child: Text("Back TO FSRN"),
             onPressed: () {
-              Navigator.pop(context,Colors.pink);
+              Navigator.pop(context, Colors.pink);
             },
           ),
         ),

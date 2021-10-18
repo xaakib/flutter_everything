@@ -20,7 +20,7 @@ class _NavigatorFirstScreenState extends State<NavigatorFirstScreen> {
         backgroundColor: Colors.white,
         title: Text(
           "First Screen",
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.blue),
         ),
       ),
       body: Container(
@@ -28,15 +28,11 @@ class _NavigatorFirstScreenState extends State<NavigatorFirstScreen> {
           child: ElevatedButton(
             child: Text("Press to Next SRN"),
             onPressed: () async {
-              final value = await Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => NavigatorSecoundScreen()),
               );
-
-              setState(() {
-                color = color == Colors.white ? Colors.grey : Colors.white;
-              });
             },
           ),
         ),

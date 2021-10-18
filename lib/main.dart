@@ -30,6 +30,6 @@ class _MyAppState extends State<MyApp> {
         ),
         // home: token==null ? LoginScreen() : HomePage()
         //
-        home: NavigatorFirstScreen());
+        home: YoutubeVideoPlayer());
   }
 }

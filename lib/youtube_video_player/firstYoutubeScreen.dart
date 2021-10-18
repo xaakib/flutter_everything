@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -35,6 +34,7 @@ class _FirstYoutubeScreenState extends State<FirstYoutubeScreen> {
     _controller = YoutubePlayerController(
       initialVideoId: videoId,
       flags: const YoutubePlayerFlags(
+        hideThumbnail: true,
         mute: false,
         autoPlay: true,
         disableDragSeek: false,
@@ -69,74 +69,53 @@ class _FirstYoutubeScreenState extends State<FirstYoutubeScreen> {
     _controller.dispose();
     super.dispose();
   }
-  late String name ;
+
+  late String name;
+  var value = "";
+  var value2 = 'red';
 
   @override
   Widget build(BuildContext context) {
     return YoutubePlayerBuilder(
-      onExitFullScreen: () {
-        // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
-        SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-      },
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
-        progressIndicatorColor: Colors.blueAccent,
-        topActions: <Widget>[
-          IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: Colors.white,
-              )),
-          const SizedBox(width: 8.0),
-          Expanded(
-            child: Text(
-              _controller.metadata.title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-              ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.white,
-              size: 25.0,
-            ),
-            onPressed: () {
-              print('Settings Tapped!');
-            },
-          ),
-        ],
+        progressIndicatorColor: Colors.red,
         onReady: () {
           _isPlayerReady = true;
         },
       ),
       builder: (context, player) => Scaffold(
-        appBar: AppBar(title: Text("data"),),
-        body: Container(
-            color: Colors.white,
-            alignment: Alignment.center,
-            height: double.infinity,
-            width: double.infinity,
-            child: Column(
-              children: [
-               if(name==null )...[
-                 Text("NUll")
-               ]else...[
-                  Container(
-                height: 200,
-                  child: player),
-               ]
-              ],
-            )),
-      ),
+          appBar: AppBar(
+            title: Text("data"),
+          ),
+          body: value == ""
+              ? Container(
+                  color: Colors.white,
+                  alignment: Alignment.center,
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      Container(height: 200, child: player),
+                      value2 == "red"
+                          ? Container(
+                              height: 400,
+                              color: Colors.red,
+                            )
+                          : Container(
+                              height: 400,
+                              color: Colors.green,
+                            ),
+                    ],
+                  ))
+              : Text("data")
+          // if (value == null) ...[
+
+          // ] else ...[
+          //   Text("value not null")
+          // ]
+          ),
     );
   }
 }
